@@ -1,8 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useSelector } from 'react-redux';
+import { useTypedSelector } from './hooks/useTypedSelector';
 
 function App() {
+
+  const notes = useTypedSelector(state => state.notes);
+  console.log(notes)
+
   return (
     <div className="App">
       <header className="App-header">
