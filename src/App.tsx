@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
+import { fetchNotesActionCreator } from './store/action-creators/notesActionCreators';
 
 function App() {
 
   const notes = useTypedSelector(state => state.notes);
+  const dispatch = useDispatch();
   console.log(notes)
+
+  useEffect(()=>{
+    dispatch(fetchNotesActionCreator());
+  },[])
 
   return (
     <div className="App">

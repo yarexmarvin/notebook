@@ -7,7 +7,7 @@ export interface INote {
 }
 
 export enum noteActionTypes {
-    // FETCH_NOTES = 'FETCH_NOTES', 
+    FETCH_NOTES = 'FETCH_NOTES', 
     SET_NOTES = 'SET_NOTES',
     ADD_NOTE = 'ADD_NOTE',
     UPDATE_NOTE = 'UPDATE_NOTE',
@@ -15,9 +15,9 @@ export enum noteActionTypes {
     CLEAR_NOTELIST = 'CLEAR_NOTELIST'
 }
 
-// interface FetchNotesAction {
-//     type: noteActionTypes.FETCH_NOTES
-// }
+interface FetchNotesAction {
+    type: noteActionTypes.FETCH_NOTES
+}
 
 interface setNotesAction {
     type: noteActionTypes.SET_NOTES;

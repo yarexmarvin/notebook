@@ -2,7 +2,7 @@ import { INote, noteAction, noteActionTypes } from "../../types/note"
 
 
 
-const initialState: INote[] = [
+export const initialNoteState: INote[] = [
     {
         id: 0,
         title: 'Untitled',
@@ -10,7 +10,7 @@ const initialState: INote[] = [
     },
 ]
 
-const noteReducer = (state: INote[] = initialState, action: noteAction): INote[] => {
+const noteReducer = (state: INote[] = [], action: noteAction): INote[] => {
     switch (action.type) {
         case noteActionTypes.SET_NOTES:
             return [...state, ...action.payload];
