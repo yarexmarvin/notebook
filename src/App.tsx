@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { addNoteActionCreator, fetchNotesActionCreator, postNotesActionCreator } from './store/action-creators/notesActionCreators';
 import { INote } from './types/note';
@@ -10,6 +10,7 @@ import NoteList from './components/NotesList';
 import NotePage from './components/NotePage';
 
 import { ChakraProvider } from "@chakra-ui/react"
+import NoteForm from './components/NoteForm';
 
 function App() {
 
@@ -43,9 +44,11 @@ function App() {
             <Route path={'/note'} exact>
               <NotePage note={note} notes={notes} updateNote={setNote}/>
             </Route>
+            <Route path={'/form'} exact>
+              <NoteForm />
+            </Route>
           </Switch>
         </div>
-
       </BrowserRouter>
     </div>
   );

@@ -16,8 +16,9 @@ const NoteList:React.FC<INotesList> = ({notes, chooseNote}) => {
          chooseNote(note)
          history.push('/note')
      }
-     
-    return <Stack direction="column" spacing={4} align="center" >
+     const goToForm = () => history.push('/form')
+    return <div>
+     <Stack direction="column" spacing={4} align="center" >
         {notes.length? notes.map((note, index)=>{
             return <Button 
             width="sm"
@@ -28,6 +29,8 @@ const NoteList:React.FC<INotesList> = ({notes, chooseNote}) => {
             </Button>
         }): 'there is no notes yet'}
     </Stack>
+    <button onClick={goToForm}> add a new note</button>
+</div>
 }
 
 export default NoteList
