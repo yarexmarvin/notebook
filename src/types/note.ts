@@ -8,6 +8,7 @@ export interface INote {
 
 export enum noteActionTypes {
     FETCH_NOTES = 'FETCH_NOTES', 
+    SAVE_NOTES = 'SAVE_NOTES',
     SET_NOTES = 'SET_NOTES',
     ADD_NOTE = 'ADD_NOTE',
     UPDATE_NOTE = 'UPDATE_NOTE',
@@ -17,6 +18,10 @@ export enum noteActionTypes {
 
 interface FetchNotesAction {
     type: noteActionTypes.FETCH_NOTES
+}
+export interface SaveNotesAction {
+    type: noteActionTypes.SAVE_NOTES;
+    payload: INote[];
 }
 
 interface setNotesAction {

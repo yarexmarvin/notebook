@@ -1,7 +1,8 @@
 import { all } from "@redux-saga/core/effects";
-import { fetchNotesWatcher } from "./noteSaga";
+import { fetchNotesWatcher } from "./notes/noteGetSaga";
+import { setNotesWatcher } from "./notes/notesSetSaga";
 
 
 export function* rootWatcher(){
-    yield all([fetchNotesWatcher()])
+    yield all([fetchNotesWatcher(), setNotesWatcher()])
 }

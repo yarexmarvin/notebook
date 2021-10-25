@@ -1,7 +1,8 @@
 import {call,put, takeEvery} from 'redux-saga/effects'
-import { INote, noteActionTypes } from '../../types/note';
-import { setNotesActionCreator } from '../action-creators/notesActionCreators';
-import { initialNoteState } from "../reducers/noteReducer";
+import { INote, noteActionTypes } from '../../../types/note';
+import { setNotesActionCreator } from '../../action-creators/notesActionCreators';
+import { initialNoteState } from "../../reducers/noteReducer";
+
 
 
 const fetchNotesFromStorage = () => JSON.parse(localStorage.getItem('notes') || JSON.stringify(initialNoteState));
@@ -9,7 +10,7 @@ const fetchNotesFromStorage = () => JSON.parse(localStorage.getItem('notes') || 
 function* fetchNotesWorker(){
     const data: INote[] = yield call(fetchNotesFromStorage);
     yield put(setNotesActionCreator(data));
-    console.log('notes fetched')
+    console.log('notes fetched from saga => ', data)
 }
 
 export function* fetchNotesWatcher(){

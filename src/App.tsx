@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
-import { fetchNotesActionCreator } from './store/action-creators/notesActionCreators';
+import { fetchNotesActionCreator, postNotesActionCreator } from './store/action-creators/notesActionCreators';
 
 function App() {
 
@@ -15,6 +15,9 @@ function App() {
     dispatch(fetchNotesActionCreator());
   },[])
 
+  useEffect(()=>{
+      dispatch(postNotesActionCreator(notes))
+  },[notes])
   return (
     <div className="App">
       <header className="App-header">
