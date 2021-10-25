@@ -1,8 +1,5 @@
 import { call, takeEvery } from "@redux-saga/core/effects";
-import { INote, noteActionTypes, SaveNotesAction } from "../../../types/note";
-
-
-
+import { noteActionTypes, SaveNotesAction } from "../../../types/note";
 
  function* setNotes(action: SaveNotesAction){
     console.log('set saga notes =>', action)
@@ -14,8 +11,7 @@ import { INote, noteActionTypes, SaveNotesAction } from "../../../types/note";
     }
 }
 
-
-function* setNotesWorker(action:any){
+function* setNotesWorker(action: SaveNotesAction){
     const result:Response = yield call(setNotes, action);
     console.log('changes saved in localStorage')
 }

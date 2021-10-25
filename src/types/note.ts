@@ -32,7 +32,7 @@ interface addNoteAction {
     type: noteActionTypes.ADD_NOTE;
     payload: INote;
 }
-interface updateNoteAction {
+export interface updateNoteAction {
     type: noteActionTypes.UPDATE_NOTE;
     payload: UpdateNotePayload
 }
@@ -44,7 +44,7 @@ interface clearNoteListAction {
     type: noteActionTypes.CLEAR_NOTELIST;
 }
 
-type UpdateNotePayload = {
+export type UpdateNotePayload = {
     index: number;
     note: INote
 }

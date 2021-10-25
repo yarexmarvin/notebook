@@ -3,8 +3,6 @@ import { INote, noteActionTypes } from '../../../types/note';
 import { setNotesActionCreator } from '../../action-creators/notesActionCreators';
 import { initialNoteState } from "../../reducers/noteReducer";
 
-
-
 const fetchNotesFromStorage = () => JSON.parse(localStorage.getItem('notes') || JSON.stringify(initialNoteState));
 
 function* fetchNotesWorker(){
