@@ -41,7 +41,7 @@ function App() {
               </ChakraProvider>
             </Route>
             <Route path={'/note'} exact>
-              <NotePage note={note} notes={notes}/>
+              <NotePage note={note} notes={notes} updateNote={setNote}/>
             </Route>
           </Switch>
         </div>

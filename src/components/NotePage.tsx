@@ -6,20 +6,20 @@ import { INote } from "../types/note"
 
 interface INotePage {
     note: INote;
-    notes: INote[]
+    notes: INote[];
+    updateNote: React.Dispatch<React.SetStateAction<INote>>
 }
 
-const NotePage: React.FC<INotePage> = ({ note, notes }) => {
+const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
 
-    const [targetNote, setTargetNotes] = useState<INote>(note)
     const [edit, setEdit] = useState('');
     const [value, setValue] = useState('')
 
 
     const history = useHistory();
     const dispatch = useDispatch();
+
     useEffect(() => {
-        if (!note) console.log('no note')
     }, [])
 
 
@@ -30,13 +30,15 @@ const NotePage: React.FC<INotePage> = ({ note, notes }) => {
 
     function saveChanges() {
 
-        console.log('index => ', notes.findIndex(x => x.id === note.id))
         let payload = {
             note: { ...note, [edit]: value },
             index: notes.findIndex(x => x.id === note.id)
         }
+
         dispatch(updateNoteActionCreator(payload));
-        setTargetNotes({ ...note, [edit]: value })
+
+        updateNote({ ...note, [edit]: value })
+
         setEdit('')
         setValue('')
 
@@ -51,8 +53,8 @@ const NotePage: React.FC<INotePage> = ({ note, notes }) => {
                     {
                         edit === 'title' ? editForm
                             :
-                            <div onClick={() => { setEdit('title'); setValue(targetNote.title) }}>
-                                {targetNote.title}
+                            <div onClick={() => { setEdit('title'); setValue(note.title) }}>
+                                {note.title}
                             </div>
 
                     }
@@ -64,8 +66,8 @@ const NotePage: React.FC<INotePage> = ({ note, notes }) => {
                 <div>
                     {edit === 'text' ? editForm
                         :
-                        <div onClick={() => { setEdit('text'); setValue(targetNote.text) }}>
-                            {targetNote.text}
+                        <div onClick={() => { setEdit('text'); setValue(note.text) }}>
+                            {note.text}
                         </div>
                     }
                 </div>
