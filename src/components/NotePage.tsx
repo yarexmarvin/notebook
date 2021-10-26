@@ -1,8 +1,22 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router"
-import { updateNoteActionCreator } from "../store/action-creators/notesActionCreators";
+import { deleteNoteActionCreator, updateNoteActionCreator } from "../store/action-creators/notesActionCreators";
 import { INote } from "../types/note"
+import { DeleteIcon, ArrowBackIcon, CheckIcon } from "@chakra-ui/icons";
+
+import {
+    Input,
+    Textarea,
+    Container,
+    Flex,
+    Heading,
+    Text,
+    Box,
+    Button,
+    IconButton
+} from '@chakra-ui/react'
+
 
 interface INotePage {
     note: INote;
@@ -15,18 +29,47 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
     const [edit, setEdit] = useState('');
     const [value, setValue] = useState('')
 
-
     const history = useHistory();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-    }, [])
+    function deleteNote() {
+        dispatch(deleteNoteActionCreator(note.id))
+        history.push('/')
+    }
 
 
-    const editForm = <div>
-        <input value={value} onChange={(e) => setValue(e.target.value)} onBlur={saveChanges} />
-        <button onClick={saveChanges}>save changes</button>
-    </div>
+    const editTitle = <Flex height="10vh" direction='row' alignItems="center">
+        <Input
+            value={value}
+            style={{
+                margin: '0 2vw 0 0'
+            }}
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={saveChanges} />
+        <Button
+            colorScheme="teal"
+            variant="outline"
+            rightIcon={<CheckIcon />}
+            onClick={saveChanges}>
+            save
+        </Button>
+    </Flex>
+    const editText = <Flex direction='column'>
+        <Textarea
+            mHeight='30vh'
+            value={value}
+            resize="vertical"
+            onChange={(e) => setValue(e.target.value)}
+            onBlur={saveChanges} />
+        <Button
+            margin="1vh 0"
+            colorScheme="teal"
+            variant="outline"
+            rightIcon={<CheckIcon />}
+            onClick={saveChanges}>
+            save
+        </Button>
+    </Flex>
 
     function saveChanges() {
 
@@ -44,36 +87,63 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
 
     }
 
-    return <div>
-
+    return <Container>
         {note ?
-            <div>
+            <Flex direction="column">
                 {/* header */}
-                < div >
+                < Box display="flex" justifyContent="flex-start" >
                     {
-                        edit === 'title' ? editForm
+                        edit === 'title' ? editTitle
                             :
-                            <div onClick={() => { setEdit('title'); setValue(note.title) }}>
+                            <Heading
+                                color="#285E61"
+                                as="h2"
+                                size="xl"
+                                style={{
+                                    margin: '5vh 0 3vh'
+                                }}
+                                onClick={() => {
+                                    setEdit('title');
+                                    setValue(note.title)
+                                }}>
                                 {note.title}
-                            </div>
+                            </Heading>
 
                     }
-
-                    :
-                </div>
+                </Box>
 
                 {/* body  */}
                 <div>
-                    {edit === 'text' ? editForm
+                    {edit === 'text' ? editText
                         :
-                        <div onClick={() => { setEdit('text'); setValue(note.text) }}>
+                        <Text
+                            color="#285E61"
+                            onClick={() => {
+                                setEdit('text');
+                                setValue(note.text)
+                            }}>
                             {note.text}
-                        </div>
+                        </Text>
                     }
                 </div>
-            </div>
+                <Flex justify="space-between" margin="2vh 0">
+                    <IconButton
+                        aria-label="back to the note list"
+                        colorScheme="teal"
+                        icon={<ArrowBackIcon />}
+                        onClick={() => history.push('/')}
+                    />
+                    <IconButton
+                        aria-label="delete note"
+                        variant="outline"
+                        colorScheme="teal"
+                        icon={<DeleteIcon />}
+                        onClick={deleteNote}
+                    />
+                </Flex>
+            </Flex>
             : 'there is no note'}
-    </div >
+    </Container >
 }
 
 export default NotePage

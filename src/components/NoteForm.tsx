@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addNoteActionCreator } from "../store/action-creators/notesActionCreators";
+import {Input, Textarea} from "@chakra-ui/react"
 
 
 
@@ -34,12 +35,12 @@ const NoteForm = () => {
     return <div>
         <div>
             <span>Title</span>
-            <input value={title} onChange={e => setTitle(e.target.value)} />
+            <Input value={title} onChange={e => setTitle(e.target.value)} />
         </div>
 
         <div>
             <span>Text</span>
-            <input value={text} onChange={e => setText(e.target.value)} />
+            <Textarea resize="vertical"  value={text} onChange={e => setText(e.target.value)} />
         </div>
 
         <button onClick={createNote}>create note</button>

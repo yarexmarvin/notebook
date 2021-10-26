@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { addNoteActionCreator, fetchNotesActionCreator, postNotesActionCreator } from './store/action-creators/notesActionCreators';
 import { INote } from './types/note';
@@ -27,7 +27,7 @@ function App() {
   }, [notes])
 
   const [note, setNote] = useState<INote>(notes[0]);
-  
+
 
 
 
@@ -42,10 +42,14 @@ function App() {
               </ChakraProvider>
             </Route>
             <Route path={'/note'} exact>
-              <NotePage note={note} notes={notes} updateNote={setNote}/>
+              <ChakraProvider>
+                <NotePage note={note} notes={notes} updateNote={setNote} />
+              </ChakraProvider>
             </Route>
             <Route path={'/form'} exact>
-              <NoteForm />
+              <ChakraProvider>
+                <NoteForm />
+              </ChakraProvider>
             </Route>
           </Switch>
         </div>
