@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={'https://yarexmarvin.github.io/notebook/'}>
         <div>
           <Switch>
             <Route path={'/'} exact>
