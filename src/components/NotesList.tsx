@@ -33,7 +33,7 @@ const NoteList: React.FC<INotesList> = ({ notes, chooseNote }) => {
     const goToForm = () => history.push('/form');
 
     return <Container width="100%" minHeight="100%" boxSizing="border-box">
-        <Heading color="#285E61" as="h1" size="4xl" style={{ textAlign: 'left', margin: '5vh 0 3vh' }} >Notes</Heading>
+        <Heading color="#285E61" as="h1" size="2xl" style={{ textAlign: 'left', margin: '5vh 0 2vh' }} >Notes</Heading>
         <Stack direction="column" spacing={2} align="center" >
             {notes.length ? notes.map((note, index) => {
                 return <Flex justifyContent="flex-start" width="100%">

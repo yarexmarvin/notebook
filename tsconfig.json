@@ -17,7 +17,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "isolatedModules": true,
     "noEmit": false,
     "sourceMap": true,
