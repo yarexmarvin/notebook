@@ -5,10 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <Provider store={store}>
+    <HashRouter basename={process.env.PUBLIC_URL}>
     <App />
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );

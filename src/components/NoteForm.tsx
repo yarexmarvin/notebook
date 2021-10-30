@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addNoteActionCreator } from "../store/action-creators/notesActionCreators";
 import { PlusSquareIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon} from "@chakra-ui/icons";
+
 import {
     Input,
     Textarea,
@@ -10,7 +12,7 @@ import {
     Heading,
     Flex,
     Button,
-    Box,
+    IconButton,
 } from "@chakra-ui/react"
 
 
@@ -51,19 +53,25 @@ const NoteForm = () => {
             <Input value={title} onChange={e => setTitle(e.target.value)} />
         </Flex>
 
-        <Flex justify='space-around'>
+        <Flex margin="1vh 0" justify='space-around'>
             <Heading color="#285E61" as="h3" size="md" style={{ textAlign: 'left', width: ' 20vh' }} >Text</Heading>
             <Textarea resize="vertical" value={text} onChange={e => setText(e.target.value)} />
         </Flex>
 
-        <Box display="flex" width="100%" justifyContent="flex-end" margin="1vh 0">
+        <Flex  width="100%" justifyContent="space-between" margin="1vh 0">
+            <IconButton
+                aria-label="back to the note list"
+                colorScheme="teal"
+                icon={<ArrowBackIcon />}
+                onClick={() => history.push('/')}
+            />
             <Button
                 onClick={createNote}
                 rightIcon={<PlusSquareIcon />}
             >
                 create a note
             </Button>
-        </Box>
+        </Flex>
     </Container>
 }
 

@@ -1,5 +1,7 @@
 const path = require("path");
-
+const webpack = require("webpack")
+const dotenv = require("dotenv")
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -49,6 +51,7 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg|ico)$/i,
                 use: ['file-loader?name=[name].[ext]'] 
             },
+            
         ]
     },
     resolve: {
@@ -62,6 +65,9 @@ module.exports = {
              manifest: "./public/manifest.json",
              favicon: './public/favicon.ico'
          }),
+         new Dotenv({
+            path: './.dev.env'
+        }),
          new ImageMinimizerPlugin({
             minimizerOptions: {
                 plugins: [

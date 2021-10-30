@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router"
 import { deleteNoteActionCreator, updateNoteActionCreator } from "../store/action-creators/notesActionCreators";
@@ -28,6 +28,9 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
 
     const [edit, setEdit] = useState('');
     const [value, setValue] = useState('')
+    const [height, setHeight] = useState(0)
+
+    const textRef = useRef<HTMLTextAreaElement>(null);
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -36,6 +39,12 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
         dispatch(deleteNoteActionCreator(note.id))
         history.push('/')
     }
+
+    useEffect(()=>{
+        if(edit === 'text'){
+            getHeight();
+        }
+    },[edit])
 
 
     const editTitle = <Flex height="10vh" direction='row' alignItems="center">
@@ -56,7 +65,8 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
     </Flex>
     const editText = <Flex direction='column'>
         <Textarea
-            mHeight='30vh'
+            style={{minHeight: height + 'px'}}
+            ref={textRef as React.RefObject<HTMLTextAreaElement>}
             value={value}
             resize="vertical"
             onChange={(e) => setValue(e.target.value)}
@@ -87,6 +97,15 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
 
     }
 
+    function getHeight():void{
+
+        if(textRef.current){
+            setHeight(textRef.current.scrollHeight + 2)
+
+        }
+    }
+
+    console.log(height)
     return <Container>
         {note ?
             <Flex direction="column">
@@ -117,6 +136,9 @@ const NotePage: React.FC<INotePage> = ({ note, notes, updateNote }) => {
                     {edit === 'text' ? editText
                         :
                         <Text
+                            id='NoteBody'
+                            
+                            onLoad={()=>getHeight()}
                             color="#285E61"
                             onClick={() => {
                                 setEdit('text');

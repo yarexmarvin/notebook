@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { addNoteActionCreator, fetchNotesActionCreator, postNotesActionCreator } from './store/action-creators/notesActionCreators';
 import { INote } from './types/note';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, HashRouter } from 'react-router-dom';
 import NoteList from './components/NotesList';
 import NotePage from './components/NotePage';
 
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename={'https://yarexmarvin.github.io/notebook/'}>
+      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
         <div>
           <Switch>
             <Route path={'/'} exact>
@@ -53,7 +53,8 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
+
     </div>
   );
 }
